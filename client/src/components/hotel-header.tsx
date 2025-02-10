@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import React, { useState } from "react";
 import HotelDetailsModal from "./hotel-details-modal";
 
 export default function HotelHeader() {
