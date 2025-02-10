@@ -1,20 +1,35 @@
 import { Card } from "@/components/ui/card";
 import { MapPin, Phone, Mail } from "lucide-react";
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 export default function LocationSection() {
+  // 東京駅付近の座標
+  const position: [number, number] = [35.6812, 139.7671];
+
   return (
     <section className="mb-12">
       <h2 className="text-2xl font-bold mb-6">アクセス</h2>
-      
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <Card className="p-6">
-          <div className="aspect-video bg-muted rounded-lg mb-4">
-            {/* Map placeholder */}
-            <div className="w-full h-full flex items-center justify-center bg-accent">
-              <MapPin className="w-12 h-12 text-accent-foreground" />
-            </div>
+          <div className="aspect-video rounded-lg mb-4 overflow-hidden">
+            <MapContainer 
+              center={position} 
+              zoom={16} 
+              style={{ height: '100%', width: '100%' }}
+            >
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              />
+              <Marker position={position}>
+                <Popup>
+                  ニュートホテル東京
+                </Popup>
+              </Marker>
+            </MapContainer>
           </div>
-          
+
           <div className="space-y-4">
             <div className="flex items-start gap-3">
               <MapPin className="w-5 h-5 mt-1" />
@@ -25,7 +40,7 @@ export default function LocationSection() {
                 </p>
               </div>
             </div>
-            
+
             <div className="flex items-start gap-3">
               <Phone className="w-5 h-5 mt-1" />
               <div>
@@ -33,7 +48,7 @@ export default function LocationSection() {
                 <p className="text-sm text-muted-foreground">03-1234-5678</p>
               </div>
             </div>
-            
+
             <div className="flex items-start gap-3">
               <Mail className="w-5 h-5 mt-1" />
               <div>
