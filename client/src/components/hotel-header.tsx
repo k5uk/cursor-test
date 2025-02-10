@@ -1,6 +1,10 @@
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import HotelDetailsModal from "./hotel-details-modal";
 
 export default function HotelHeader() {
+  const [showDetails, setShowDetails] = useState(false);
+
   return (
     <header className="relative">
       <div 
@@ -11,7 +15,7 @@ export default function HotelHeader() {
       >
         <div className="absolute inset-0 bg-black/40" />
       </div>
-      
+
       <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
         <div className="container mx-auto">
           <h1 className="text-4xl font-bold mb-2">
@@ -24,12 +28,21 @@ export default function HotelHeader() {
             <Button variant="default" size="lg">
               予約を開始
             </Button>
-            <Button variant="outline" size="lg">
+            <Button 
+              variant="outline" 
+              size="lg"
+              onClick={() => setShowDetails(true)}
+            >
               詳細を見る
             </Button>
           </div>
         </div>
       </div>
+
+      <HotelDetailsModal
+        open={showDetails}
+        onOpenChange={setShowDetails}
+      />
     </header>
   );
 }
